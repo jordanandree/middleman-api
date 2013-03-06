@@ -3,5 +3,4 @@ foo: bar
 baz: boo
 ---
 
-p
-  strong Lorem Ipsum
+<b>Lorem Ipsum</b>

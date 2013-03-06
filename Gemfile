@@ -2,9 +2,6 @@ source 'http://rubygems.org'
 
 gemspec
 
-gem "slim"
-gem "redcloth"
-
 group :development do
   gem "rake",     "~> 0.9.2"
   gem "rdoc",     "~> 3.9"
@@ -16,6 +13,11 @@ group :test do
   gem "fivemat"
   gem "aruba",    "~> 0.4.11"
   gem "rspec",    "~> 2.7"
-  gem "redcarpet"
   gem "pry-debugger"
+
+  # Template Engines
+  gem "redcarpet"
+  gem "slim"
+  gem "RedCloth"
+  gem "liquid"
 end
