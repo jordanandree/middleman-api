@@ -33,3 +33,5 @@ Feature: JSON API
       | tilt/slim.json |
       | tilt/textile.html |
       | tilt/textile.json |
+      | tilt/haml.html |
+      | tilt/haml.json |

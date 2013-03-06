@@ -20,4 +20,5 @@ group :test do
   gem "slim"
   gem "RedCloth"
   gem "liquid"
+  gem "haml"
 end

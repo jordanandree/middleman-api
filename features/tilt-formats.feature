@@ -38,3 +38,11 @@ Feature: Tilt Formats
     """
     {"meta":{"foo":"bar","baz":"boo"},"content":"\n<p><strong>Lorem Ipsum</strong></p>\n"}
     """
+
+  Scenario: haml
+    Given the Server is running at "middleman-app"
+    When I go to "/tilt/haml.json"
+    Then I should see:
+    """
+    {"meta":{"foo":"bar","baz":"boo"},"content":"<em>Haml</em>\n"}
+    """
