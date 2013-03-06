@@ -15,6 +15,14 @@ Feature: JSON API
     "content":"<h1>Header</h1>\n\n<p>lorem ipsum</p>\n"
     """
 
+  Scenario: template with no front matter
+    Given the Server is running at "middleman-app"
+    When I go to "/no-frontmatter.json"
+    Then I should see:
+    """
+    "content":"<div>No Frontmatter</div>"
+    """
+
   Scenario: built files
     Given a built app at "middleman-app" with flags "--verbose --clean"
     When I cd to "build"

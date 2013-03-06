@@ -10,7 +10,7 @@ module Middleman::Api
     def manipulate_resource_list(resources)
       proxies = []
       resources.each do |resource|
-        if resource.path != @proxy_to && resource.data.length > 0
+        if resource.path != @proxy_to && resource.template?
           path = "#{resource.path.split('.').first}.json"
           proxy = ::Middleman::Sitemap::Resource.new(@app.sitemap, path)
           proxy.proxy_to @proxy_to
