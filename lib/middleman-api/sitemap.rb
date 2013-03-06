@@ -10,7 +10,7 @@ module Middleman::Api
     def manipulate_resource_list(resources)
       proxies = []
       resources.each do |resource|
-        if resource.path != @proxy_to && resource.template?
+        if resource.path != @proxy_to && resource.template? && !(resource.ext =~ /json/)
           path = "#{resource.path.split('.').first}.json"
           proxy = ::Middleman::Sitemap::Resource.new(@app.sitemap, path)
           proxy.proxy_to @proxy_to
@@ -26,7 +26,7 @@ module Middleman::Api
     def json_hash(resource)
       json = {}
       json[:meta] = resource.data
-      json[:content] = @app.render_individual_file(resource.source_file)
+      json[:content] = resource.render
       {locals: { json: json.to_json }}
     end
   end

@@ -12,7 +12,7 @@ Feature: JSON API
     When I go to "/test.json"
     Then I should see:
     """
-    "content":"<h1>Header</h1>\n\n<p>lorem ipsum</p>\n"
+    <h1>Header</h1>\n\n<p>lorem ipsum</p>\n
     """
 
   Scenario: template with no front matter
@@ -20,7 +20,7 @@ Feature: JSON API
     When I go to "/no-frontmatter.json"
     Then I should see:
     """
-    "content":"<div>No Frontmatter</div>"
+    <div>No Frontmatter</div>
     """
 
   Scenario: built files
