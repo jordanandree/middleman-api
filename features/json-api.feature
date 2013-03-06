@@ -23,7 +23,6 @@ Feature: JSON API
       | index.json |
       | test.html |
       | test.json |
-      | tilt/liquid.html |
       | tilt/liquid.json |
       | tilt/markdown.html |
       | tilt/markdown.json |
