@@ -26,6 +26,7 @@ module Middleman::Api
     def json_hash(resource)
       json = {}
       json[:meta] = resource.data
+      json[:path] = resource.path
       json[:content] = resource.render
       {locals: { json: json.to_json }}
     end

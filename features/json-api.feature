@@ -6,6 +6,10 @@ Feature: JSON API
     """
     "meta":{"foo":"bar"}
     """
+    And I should see:
+    """
+    "path":"test.html"
+    """
 
   Scenario: json content
     Given the Server is running at "middleman-app"
