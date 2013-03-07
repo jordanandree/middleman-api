@@ -1,8 +1,9 @@
+require "active_support/core_ext"
+
 module Middleman::Api
   class Sitemap
     def initialize(app)
       @app = app
-      @proxy_to = "api.json"
     end
 
     # Update the main sitemap resource list
@@ -10,12 +11,16 @@ module Middleman::Api
     def manipulate_resource_list(resources)
       proxies = []
       resources.each do |resource|
-        if resource.path != @proxy_to && resource.template? && !(resource.ext =~ /json/)
-          path = "#{resource.path.split('.').first}.json"
-          proxy = ::Middleman::Sitemap::Resource.new(@app.sitemap, path)
-          proxy.proxy_to @proxy_to
-          proxy.add_metadata json_hash(resource)
-          proxies << proxy
+        ext = resource.ext.gsub('.','').to_sym
+        if resource.template? && !(@app.api_formats.include?(ext))
+          @app.api_formats.each do |format|
+            path = "#{resource.path.split('.').first}.#{format}"
+            proxy = ::Middleman::Sitemap::Resource.new(@app.sitemap, path)
+            proxy.proxy_to "api.#{format}"
+            proxy.add_metadata locals: template_data(resource, format)
+            proxy.add_metadata options: { layout: false }
+            proxies << proxy
+          end
         end
       end
       proxies + resources
@@ -23,12 +28,12 @@ module Middleman::Api
 
     # Resource data hash
     # @return [Hash] resource data to be parsed into json
-    def json_hash(resource)
-      json = {}
-      json[:meta] = resource.data
-      json[:path] = resource.path
-      json[:content] = resource.render
-      {locals: { json: json.to_json }}
+    def template_data(resource, format)
+      data = {}
+      data[:meta] = resource.data
+      data[:path] = resource.url
+      data[:content] = resource.render
+      { data: data.send("to_#{format}") }
     end
   end
 end

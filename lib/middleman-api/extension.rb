@@ -7,6 +7,9 @@ module Middleman::Api
 
     # Called when extension is activated
     def registered(app, options={})
+      # Add class methods to context
+      app.send :include, ClassMethods
+
       app.after_configuration do
         # Register json.erb template
         sitemap.register_resource_list_manipulator(:middleman_api_template, Middleman::Api::Template.new(self), false)
@@ -17,5 +20,13 @@ module Middleman::Api
     end
 
     alias :included :registered
+
+    module ClassMethods
+      # @return [Hash]
+      def api_formats
+        [:json, :xml]
+      end
+    end
+
   end
 end

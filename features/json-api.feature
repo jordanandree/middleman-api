@@ -8,7 +8,7 @@ Feature: JSON API
     """
     And I should see:
     """
-    "path":"test.html"
+    "path":"/test.html"
     """
 
   Scenario: json content
