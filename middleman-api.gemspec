@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["jordanandree"]
   s.email       = ["jordanandree@gmail.com"]
-  # s.homepage    = "http://example.com"
+  s.homepage    = "http://github.com/jordanandree/middleman-api"
   s.summary     = %q{Middleman Extension that generates JSON and XML endpoints}
   s.description = %q{Middleman Extension that generates JSON and XML endpoints}
 
