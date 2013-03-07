@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.authors     = ["jordanandree"]
   s.email       = ["jordanandree@gmail.com"]
   # s.homepage    = "http://example.com"
-  s.summary     = %q{Middleman API Extension}
-  s.description = %q{A Middleman Extension that generates JSON and XML endpoints for template frontmatter}
+  s.summary     = %q{Middleman Extension that generates JSON and XML endpoints}
+  s.description = %q{Middleman Extension that generates JSON and XML endpoints}
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
