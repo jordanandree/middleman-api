@@ -9,6 +9,12 @@ group :development do
 end
 
 group :test do
+  gem "middleman", github: "middleman/middleman", branch: "master" do
+    gem "middleman"
+    gem "middleman-core"
+    gem "middleman-more"
+  end
+
   gem "cucumber", "~> 1.2.0"
   gem "fivemat"
   gem "aruba",    "~> 0.4.11"
