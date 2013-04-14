@@ -14,7 +14,7 @@ module Middleman::Api
         ext = resource.ext.gsub('.','').to_sym
         if resource.template? && !resource.ignored? && !(@app.api_formats.include?(ext))
           @app.api_formats.each do |format|
-            path = "#{resource.path.split('.').first}.#{format}"
+            path = "#{resource.destination_path.split('.').first}.#{format}"
             proxy = ::Middleman::Sitemap::Resource.new(@app.sitemap, path)
             proxy.proxy_to "api.#{format}"
             proxy.add_metadata locals: template_data(resource, format)
