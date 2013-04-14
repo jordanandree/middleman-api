@@ -12,7 +12,7 @@ module Middleman::Api
       proxies = []
       resources.each do |resource|
         ext = resource.ext.gsub('.','').to_sym
-        if resource.template? && !(@app.api_formats.include?(ext))
+        if resource.template? && !resource.ignored? && !(@app.api_formats.include?(ext))
           @app.api_formats.each do |format|
             path = "#{resource.path.split('.').first}.#{format}"
             proxy = ::Middleman::Sitemap::Resource.new(@app.sitemap, path)
