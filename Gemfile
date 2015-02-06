@@ -9,17 +9,22 @@ group :development do
 end
 
 group :test do
-  gem "middleman", github: "middleman/middleman", branch: "master" do
+  gem "middleman", github: "middleman/middleman", branch: "v3-stable" do
     gem "middleman"
     gem "middleman-core"
     gem "middleman-more"
   end
 
-  gem "cucumber", "~> 1.2.0"
+  gem "cucumber", "~> 1.3.0"
   gem "fivemat"
   gem "aruba",    "~> 0.4.11"
   gem "rspec",    "~> 2.7"
-  gem "pry-debugger"
+
+  if RUBY_VERSION <= "1.9.3"
+    gem "pry-debugger"
+  else
+    gem "pry-byebug"
+  end
 
   # Template Engines
   gem "redcarpet"
