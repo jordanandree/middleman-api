@@ -6,12 +6,6 @@ gem "rake",     "~> 0.9.2"
 gem "rdoc",     "~> 3.9"
 gem "yard",     "~> 0.8.0"
 
-if RUBY_VERSION <= "1.9.3"
-  gem "pry-debugger"
-else
-  gem "pry-byebug"
-end
-
 group :test do
   gem "middleman", github: "middleman/middleman", branch: "v3-stable" do
     gem "middleman"
