@@ -30,7 +30,7 @@ The extension will then look over each template in the sitemap and proxy frontma
 
 ```json
 {
-  "meta" {
+  "meta": {
     "title" : "Middleman",
     "foo" : "bar"
   },
