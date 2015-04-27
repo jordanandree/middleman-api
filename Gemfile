@@ -8,6 +8,12 @@ group :development do
   gem "yard",     "~> 0.8.0"
 end
 
+if RUBY_VERSION <= "1.9.3"
+  gem "pry-debugger"
+else
+  gem "pry-byebug"
+end
+
 group :test do
   gem "middleman", github: "middleman/middleman", branch: "v3-stable" do
     gem "middleman"
@@ -19,12 +25,6 @@ group :test do
   gem "fivemat"
   gem "aruba",    "~> 0.4.11"
   gem "rspec",    "~> 2.7"
-
-  if RUBY_VERSION <= "1.9.3"
-    gem "pry-debugger"
-  else
-    gem "pry-byebug"
-  end
 
   # Template Engines
   gem "redcarpet"
