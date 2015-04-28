@@ -47,7 +47,13 @@ module Middleman::Api
       end
 
       def add_proxy_for_format(resource, format)
-        path = "#{resource.destination_path.split('.').first}.#{format}"
+        if resource.url == '/' || !(resource.path =~ /index\.html$/)
+          path_base = "#{resource.destination_path.split('.').first}"
+        else
+          path_base = "#{resource.destination_path.split('/')[0..-2].join('/')}"
+        end
+
+        path = "#{path_base}.#{format}"
 
         proxy = ::Middleman::Sitemap::Resource.new(
           app.sitemap, path, fetch_template)
