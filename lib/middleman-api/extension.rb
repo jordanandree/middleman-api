@@ -28,6 +28,10 @@ module Middleman::Api
           ext = resource.ext.gsub('.','').to_sym
 
           next if resource.ignored? || ext == format
+          next if Middleman::Util.path_match(app.images_dir, resource.path)
+          next if Middleman::Util.path_match(app.js_dir, resource.path)
+          next if Middleman::Util.path_match(app.css_dir, resource.path)
+          next if Middleman::Util.path_match(app.fonts_dir, resource.path)
           next unless resource.template?
 
           new_resources << add_proxy_for_format(resource, format)
