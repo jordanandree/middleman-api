@@ -57,6 +57,10 @@ module Middleman::Api
           path_base = "#{resource.destination_path.split('/')[0..-2].join('/')}"
         end
 
+        if @app.extensions.include?(:directory_indexes)
+          path_base.gsub!("/index", "")
+        end
+
         path = "#{path_base}.#{format}"
 
         proxy = ::Middleman::Sitemap::Resource.new(
