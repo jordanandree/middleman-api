@@ -13,11 +13,16 @@ module Middleman::Api
     # ignore metadata keys
     option :ignore_metadata_keys, []
 
+    # Path to custom template (should probably be ERB)
+    option :template, nil
+
     def after_configuration
       # Hack to reload our templates dir into the FileWatcher API
       # https://github.com/middleman/middleman/issues/1217#issuecomment-38014250
       fix_templates_for_filewatcher!
+
       app.ignore "__api/*"
+      app.ignore options.template
     end
 
     def manipulate_resource_list(resources)
@@ -81,7 +86,7 @@ module Middleman::Api
         proxy = ::Middleman::Sitemap::Resource.new(
           app.sitemap, path, fetch_template)
         proxy.add_metadata locals: template_data(resource, format)
-        proxy.add_metadata options: { layout: false }
+        proxy.add_metadata options: { layout: false, }
         proxy.proxy_to "__api/proxy.#{format}"
 
         return proxy
@@ -92,17 +97,25 @@ module Middleman::Api
       def template_data(resource, format)
         data = {}
         meta = resource.data.select { |k,v| !options.ignore_metadata_keys.include?(k) }
-        data[:resource_data] = {
-          meta:    meta,
-          path:    resource.url,
-          content: resource.render
-        }.send("to_#{format}")
+
+        data = {
+          format: format,
+          resource_data: {
+            meta:    meta,
+            path:    resource.url,
+            content: resource.render
+          }
+        }
 
         return data
       end
 
       def fetch_template
-        File.expand_path("../template.erb", __FILE__)
+        if options.template
+          File.join(app.source_dir, options.template)
+        else
+          File.expand_path("../template.erb", __FILE__)
+        end
       end
 
     ::Middleman::Extensions.register(:api, Middleman::Api::Extension)
