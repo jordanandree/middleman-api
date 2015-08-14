@@ -10,6 +10,9 @@ module Middleman::Api
     # Specific paths to render as :formats
     option :paths, []
 
+    # ignore metadata keys
+    option :ignore_metadata_keys, []
+
     def after_configuration
       # Hack to reload our templates dir into the FileWatcher API
       # https://github.com/middleman/middleman/issues/1217#issuecomment-38014250
@@ -88,8 +91,9 @@ module Middleman::Api
       # @return [Hash] resource data to be parsed into json
       def template_data(resource, format)
         data = {}
+        meta = resource.data.select { |k,v| !options.ignore_metadata_keys.include?(k) }
         data[:resource_data] = {
-          meta:    resource.data,
+          meta:    meta,
           path:    resource.url,
           content: resource.render
         }.send("to_#{format}")
