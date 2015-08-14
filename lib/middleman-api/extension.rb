@@ -7,6 +7,9 @@ module Middleman::Api
     # Support for .json and .xml
     option :formats, [:json, :xml]
 
+    # Specific paths to render as :formats
+    option :paths, []
+
     def after_configuration
       # Hack to reload our templates dir into the FileWatcher API
       # https://github.com/middleman/middleman/issues/1217#issuecomment-38014250
@@ -33,6 +36,7 @@ module Middleman::Api
           next if Middleman::Util.path_match(app.css_dir, resource.path)
           next if Middleman::Util.path_match(app.fonts_dir, resource.path)
           next unless resource.template?
+          next if options.paths.any? && !matches_include_paths?(resource.path)
 
           new_resources << add_proxy_for_format(resource, format)
         end
@@ -42,6 +46,14 @@ module Middleman::Api
     end
 
     private
+
+      def matches_include_paths?(resource_path)
+        options.paths.each do |path|
+          next unless resource_path =~ %r[^#{path}]
+          return true; break
+        end
+        return false
+      end
 
       def fix_templates_for_filewatcher!
         extension_templates_dir = File.expand_path('../', __FILE__)
