@@ -4,7 +4,7 @@ Feature: JSON API
     When I go to "/test.json"
     Then I should see:
     """
-    "meta":{"foo":"bar"}
+    "metadata":{"foo":"bar"}
     """
     And I should see:
     """

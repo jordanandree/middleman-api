@@ -4,9 +4,9 @@ Feature: XML API
     When I go to "/test.xml"
     Then I should see:
     """
-      <meta>
+      <metadata>
         <foo>bar</foo>
-      </meta>
+      </metadata>
     """
     And I should see:
     """

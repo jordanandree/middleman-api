@@ -96,14 +96,14 @@ module Middleman::Api
       # @return [Hash] resource data to be parsed into json
       def template_data(resource, format)
         data = {}
-        meta = resource.data.select { |k,v| !options.ignore_metadata_keys.include?(k) }
+        metadata = resource.data.select { |k,v| !options.ignore_metadata_keys.include?(k) }
 
         data = {
           format: format,
           resource_data: {
-            meta:    meta,
-            path:    resource.url,
-            content: resource.render
+            metadata: Middleman::Util.recursively_enhance(metadata),
+            path:     resource.url,
+            content:  resource.render
           }
         }
 
