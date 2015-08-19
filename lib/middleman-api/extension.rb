@@ -44,7 +44,7 @@ module Middleman::Api
           next if Middleman::Util.path_match(app.css_dir, resource.path)
           next if Middleman::Util.path_match(app.fonts_dir, resource.path)
           next unless resource.template?
-          next if options.paths.any? && !matches_include_paths?(resource.path)
+          next if options.paths.any? && !matches_include_paths?(resource)
 
           new_resources << add_proxy_for_format(resource, format)
         end
@@ -55,9 +55,9 @@ module Middleman::Api
 
     private
 
-      def matches_include_paths?(resource_path)
+      def matches_include_paths?(resource)
         options.paths.each do |path|
-          next unless resource_path =~ %r[^#{path}]
+          next unless resource.path =~ %r[^#{path}] || resource.destination_path =~ %r[^#{path}]
           return true; break
         end
         return false
