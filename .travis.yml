@@ -3,8 +3,10 @@ sudo: false
 cache: bundler
 bundler_args: "--without development"
 rvm:
-- 2.2
-- 2.1
-- 2.0
-- 1.9.3
-- rbx-2.2.7
+  - ruby-head
+  - 2.2
+  - 2.1
+  - 2.0
+  - 1.9.3
+env: TEST=true
+script: bundle exec rake test
