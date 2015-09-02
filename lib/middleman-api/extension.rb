@@ -103,7 +103,7 @@ module Middleman::Api
           resource_data: {
             metadata: Middleman::Util.recursively_enhance(metadata),
             path:     resource.url,
-            content:  resource.render
+            content:  lambda { resource.render }
           }
         }
 

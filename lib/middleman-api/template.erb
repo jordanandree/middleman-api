@@ -1,1 +1,7 @@
-<%= resource_data.send("to_#{format}") %>
+<%=
+{
+  metadata: resource_data[:metadata],
+  path:     resource_data[:path],
+  content:  resource_data[:content].call
+}.send("to_#{format}")
+%>
