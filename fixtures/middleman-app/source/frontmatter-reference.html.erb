@@ -1,0 +1,9 @@
+---
+list:
+ - name: foo
+ - name: bar
+---
+
+<% current_resource.data.list.each do |node| %>
+  <h2><%= node.name %></h2>
+<% end %>

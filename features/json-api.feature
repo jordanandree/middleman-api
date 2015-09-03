@@ -27,6 +27,14 @@ Feature: JSON API
     <div>No Frontmatter</div>
     """
 
+  Scenario: page with frontmatter references
+    Given the Server is running at "middleman-app"
+    When I go to "/frontmatter-reference.json"
+    Then I should see:
+    """
+    <h2>foo</h2>\n
+    """
+
   Scenario: built files
     Given a built app at "middleman-app" with flags "--verbose --clean"
     When I cd to "build"

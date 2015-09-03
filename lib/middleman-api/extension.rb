@@ -85,8 +85,11 @@ module Middleman::Api
 
         proxy = ::Middleman::Sitemap::Resource.new(
           app.sitemap, path, fetch_template)
+
         proxy.add_metadata locals: template_data(resource, format)
-        proxy.add_metadata options: { layout: false, }
+        proxy.add_metadata options: { layout: false }
+        proxy.instance_variable_set "@enhanced_data", ::Middleman::Util.recursively_enhance(resource.raw_data).freeze
+
         proxy.proxy_to "__api/proxy.#{format}"
 
         return proxy
