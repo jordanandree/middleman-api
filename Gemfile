@@ -7,16 +7,11 @@ gem "rdoc",     "~> 3.9"
 gem "yard",     "~> 0.8.0"
 
 group :test do
-  gem "middleman", github: "middleman/middleman", branch: "v3-stable" do
-    gem "middleman"
-    gem "middleman-core"
-    gem "middleman-more"
-  end
+  gem "middleman", github: "middleman/middleman", branch: "v3-stable"
 
-  gem "cucumber", "~> 1.3.0"
-  gem "fivemat"
-  gem "aruba",    "~> 0.4.11"
-  gem "rspec",    "~> 2.7"
+  gem 'aruba', '~> 0.7.4', require: false
+  gem 'rspec', '~> 3.0', require: false
+  gem 'cucumber', '~> 2.0', require: false
 
   # Template Engines
   gem "redcarpet"
