@@ -1,6 +1,7 @@
 require 'bundler'
 Bundler::GemHelper.install_tasks
 
+require 'pry-byebug'
 require 'cucumber/rake/task'
 
 Cucumber::Rake::Task.new(:cucumber, 'Run features that should pass') do |t|
