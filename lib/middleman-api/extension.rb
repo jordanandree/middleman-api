@@ -35,13 +35,9 @@ module Middleman::Api
         resources.each do |resource|
           ext = resource.ext.gsub('.','').to_sym
 
-          next if resource.ignored? || ext == format
-          next if Middleman::Util.path_match(app.config.images_dir, resource.path)
-          next if Middleman::Util.path_match(app.config.js_dir, resource.path)
-          next if Middleman::Util.path_match(app.config.css_dir, resource.path)
-          next if Middleman::Util.path_match(app.config.fonts_dir, resource.path)
-          next unless resource.template?
           next if options.paths.any? && !matches_include_paths?(resource)
+          next if resource.ignored? || ext == format
+          next if should_ignore_resource?(resource)
 
           new_resources << add_proxy_for_format(resource, format)
         end
@@ -51,6 +47,15 @@ module Middleman::Api
     end
 
     private
+
+      def should_ignore_resource?(resource)
+        return true if Middleman::Util.path_match("#{app.config.images_dir}*", resource.path)
+        return true if Middleman::Util.path_match("#{app.config.js_dir}*", resource.path)
+        return true if Middleman::Util.path_match("#{app.config.css_dir}*", resource.path)
+        return true if Middleman::Util.path_match("#{app.config.fonts_dir}*", resource.path)
+        return true unless resource.template?
+        return false
+      end
 
       def matches_include_paths?(resource)
         options.paths.each do |path|
