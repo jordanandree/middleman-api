@@ -37,9 +37,3 @@ Feature: XML API
     Then the following files should exist:
       | index.xml |
       | test.xml |
-      | tilt/liquid.xml |
-      | tilt/markdown.xml |
-      | tilt/rdoc.xml |
-      | tilt/slim.xml |
-      | tilt/textile.xml |
-      | tilt/haml.xml |
