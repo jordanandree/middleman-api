@@ -1,4 +1,6 @@
-# Middleman API [![Build Status](https://travis-ci.org/jordanandree/middleman-api.png?branch=master)](https://travis-ci.org/jordanandree/middleman-api)
+# Middleman API
+[![Build Status](https://travis-ci.org/jordanandree/middleman-api.png?branch=master)](https://travis-ci.org/jordanandree/middleman-api)
+[![Dependency Status](https://gemnasium.com/badges/github.com/jordanandree/middleman-api.svg)](https://gemnasium.com/github.com/jordanandree/middleman-api)
 
 Create JSON and XML endpoints generated from template frontmatter and content.
 
