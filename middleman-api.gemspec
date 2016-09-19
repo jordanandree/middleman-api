@@ -18,4 +18,9 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency('middleman-core', ['~> 4.0'])
   s.add_runtime_dependency('builder', ['~> 3.2.0'])
+
+  if RUBY_VERSION <= "2.2.0"
+    s.add_runtime_dependency('activesupport', ['< 5.0.0'])
+    s.add_runtime_dependency('rack', ['< 2.0.1'])
+  end
 end
